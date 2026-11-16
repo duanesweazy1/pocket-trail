@@ -55,9 +55,9 @@ GPS positions jitter by a few metres even when you stand still. Trail Recorder s
 Download the `.deb` from [Releases](https://github.com/duanesweazy1/pocket-trail/releases). Then from PowerShell (Windows) or a terminal on your PC:
 
 ```
-scp pocket-trail_1.0.2-rev1_arm64.deb YOURUSER@DEVICE-IP:~/
+scp pocket-trail_1.0.3-rev1_arm64.deb YOURUSER@DEVICE-IP:~/
 ssh YOURUSER@DEVICE-IP
-sudo apt install ~/pocket-trail_1.0.2-rev1_arm64.deb
+sudo apt install ~/pocket-trail_1.0.3-rev1_arm64.deb
 sudo reboot
 ```
 
@@ -80,7 +80,7 @@ python3 trail.py --preview page1.png 0 --mock     # pages are numbered 0-4 here
 ## Hardware details
 
 - GNSS: NMEA 0183 on `/dev/ttyS0` at 115200 8N1. Override with `TRAIL_GPS_DEV`.
-- Cap power: `/sys/class/leds/ext_5v_out/brightness`. It is switched on when the app starts and restored to its previous state on exit, matching M5Stack's own GPS app. The package installs a udev rule that lets the `gpio` group control it, so the app doesn't need root.
+- Cap power: `/sys/class/leds/ext_5v_out/brightness`. It is switched on when the app starts and restored to its previous state on exit, matching M5Stack's own GPS app. The package installs a systemd-tmpfiles entry (`/usr/lib/tmpfiles.d/pocket-trail.conf`) that lets the `gpio` group control it at every boot, so the app doesn't need root.
 
 ## Rebuild the .deb
 

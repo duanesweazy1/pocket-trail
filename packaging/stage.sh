@@ -2,8 +2,8 @@
 set -euo pipefail
 
 install -D -m 0644 trail.py "$STAGE$APP_INSTALL_DIR/trail.py"
-# Lets the gpio group switch the Cap's 5 V rail (same rule M5Stack's LoRa app uses)
-install -D -m 0644 packaging/71-pocket-trail-ext5v.rules "$STAGE/etc/udev/rules.d/71-pocket-trail-ext5v.rules"
+# Lets the gpio group switch the Cap's 5 V rail (systemd-tmpfiles applies it at boot)
+install -D -m 0644 packaging/pocket-trail.tmpfiles "$STAGE/usr/lib/tmpfiles.d/pocket-trail.conf"
 
 tmp=$(mktemp)
 cat >"$tmp" <<'LAUNCHER'

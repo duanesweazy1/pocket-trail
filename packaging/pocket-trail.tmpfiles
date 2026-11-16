@@ -1,0 +1,2 @@
+# Let the gpio group switch the Cap LoRa-1262's 5 V rail (applied at every boot)
+z /sys/class/leds/ext_5v_out/brightness 0664 root gpio -

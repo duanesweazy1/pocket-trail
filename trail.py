@@ -44,7 +44,7 @@ try:
 except ImportError:
     HAS_NUMPY = False
 
-VERSION = "1.0.2"
+VERSION = "1.0.3"
 APP = "pocket-trail"
 
 # --------------------------------------------------------------------------
