@@ -1,0 +1,16 @@
+#!/bin/sh
+# Screen (video), keyboard (input), GPS serial port (dialout) and Cap power (gpio).
+set -e
+for user in $(getent passwd | awk -F: '$3 >= 1000 && $3 < 60000 {print $1}'); do
+    for grp in video input dialout gpio; do
+        if getent group "$grp" >/dev/null; then
+            usermod -aG "$grp" "$user" || true
+        fi
+    done
+done
+# Apply the Cap power rule now (group changes still need a reboot or re-login)
+if command -v udevadm >/dev/null 2>&1; then
+    udevadm control --reload-rules || true
+    udevadm trigger --subsystem-match=leds --action=add || true
+fi
+exit 0
